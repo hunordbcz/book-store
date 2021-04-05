@@ -3,22 +3,24 @@ package net.debreczeni.view.table;
 import net.debreczeni.model.Book;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
 public class BookTableModel extends AbstractTableModel {
 
-    protected final static int TITLE = 0;
-    protected final static int AUTHOR = 1;
-    protected final static int GENRE = 2;
-    protected final static int QUANTITY = 3;
-    protected final static int PRICE = 4;
+    public final static int TITLE = 0;
+    public final static int AUTHOR = 1;
+    public final static int GENRE = 2;
+    public final static int QUANTITY = 3;
+    public final static int PRICE = 4;
 
     private final Supplier<List<Book>> bookSupplier;
     protected List<Book> books;
 
     public BookTableModel(Supplier<List<Book>> bookSupplier) {
         this.bookSupplier = bookSupplier;
+        this.books = new ArrayList<>();
     }
 
     public void refresh() {

@@ -2,7 +2,7 @@ package net.debreczeni.view;
 
 import net.debreczeni.controller.AuthController;
 import net.debreczeni.exception.AuthException;
-import net.debreczeni.model.Manager;
+import net.debreczeni.model.AccessType;
 import net.debreczeni.model.User;
 
 import javax.swing.*;
@@ -25,16 +25,7 @@ public class Login extends JFrame {
 
         enterButton.addActionListener(e -> {
             try {
-                final User user = authController.authenticate(usernameField.getText(), passwordField.getPassword());
-
-                final JFrame homepage;
-                if (user instanceof Manager) {
-                    homepage = new BookManagement(this, (Manager) user);
-                } else {
-                    homepage = new BookStore(this, user);
-                }
-
-                homepage.setVisible(true);
+                authController.authenticate(usernameField.getText(), passwordField.getPassword());
                 this.dispose();
             } catch (AuthException authException) {
                 JOptionPane.showMessageDialog(

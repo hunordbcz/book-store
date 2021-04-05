@@ -1,6 +1,5 @@
 package net.debreczeni.view;
 
-import net.debreczeni.model.Manager;
 import net.debreczeni.model.User;
 
 import javax.swing.*;
@@ -8,14 +7,14 @@ import java.awt.*;
 
 public class BookManagement extends JFrame{
     private JPanel mainPanel;
-    private final Manager manager;
+    private final User user;
 
-    public BookManagement(Component relativeTo, Manager manager) throws HeadlessException {
-        this.manager = manager;
+    public BookManagement(User user) throws HeadlessException {
+        this.user = user;
         this.setTitle(this.getClass().getSimpleName());
         this.setContentPane(mainPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(relativeTo);
+        this.setLocationRelativeTo(null);
         this.pack();
     }
 }
