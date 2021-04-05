@@ -10,23 +10,23 @@ import java.util.List;
 public class BookController {
     public List<Book> getAll() {
         Book book1 = new Book(
-                "Title",
-                "Author",
-                "Genre",
+                "Title1",
+                "Author1",
+                "Genre1",
                 12L,
                 10D
         );
         Book book2 = new Book(
-                "Clean Code",
-                "Joking Rowling",
-                "Comedy",
+                "Clean Code2",
+                "Joking Rowling2",
+                "Comedy2",
                 12L,
                 10D
         );
         Book book3 = new Book(
-                "asd",
-                "tes",
-                "ghj",
+                "asd3",
+                "tes3",
+                "ghj3",
                 12L,
                 10D
         );

@@ -1,16 +1,13 @@
 package net.debreczeni.view;
 
-import net.debreczeni.model.User;
+import net.debreczeni.util.FilterOnChangeDocumentListener;
 import net.debreczeni.view.table.BookTableModel;
 import net.debreczeni.view.table.SearchableBookTableModel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
-public class BookStore extends JFrame{
+public class BookStore extends JFrame {
     private JPanel mainPanel;
     private JButton addToOrderButton;
     private JTable bookTable;
@@ -36,42 +33,29 @@ public class BookStore extends JFrame{
 
         bookListModel.setGenreFilter(new RowFilter<>() {
             public boolean include(Entry entry) {
-                return true;
+                final String genre = entry.getStringValue(BookTableModel.GENRE);
+                return genre.toLowerCase().contains(genreSearchField.getText().trim().toLowerCase());
             }
         });
 
         bookListModel.setAuthorFilter(new RowFilter<>() {
             public boolean include(Entry entry) {
-                return true;
+                final String author = entry.getStringValue(BookTableModel.AUTHOR);
+                return author.toLowerCase().contains(authorSearchField.getText().trim().toLowerCase());
             }
         });
 
         bookListModel.setTitleFilter(new RowFilter<>() {
             public boolean include(Entry entry) {
-                return true;
+                final String title = entry.getStringValue(BookTableModel.TITLE);
+                return title.toLowerCase().contains(titleSearchField.getText().trim().toLowerCase());
             }
         });
+        bookTable.setRowSorter(bookListModel.getRowSorter());
 
-
-        genreSearchField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                bookListModel.filter();
-            }
-        });
-
-        authorSearchField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                bookListModel.filter();
-            }
-        });
-
-        titleSearchField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                bookListModel.filter();
-            }
-        });
+        final FilterOnChangeDocumentListener filterListener = new FilterOnChangeDocumentListener(bookListModel.getRowSorter());
+        genreSearchField.getDocument().addDocumentListener(filterListener);
+        authorSearchField.getDocument().addDocumentListener(filterListener);
+        titleSearchField.getDocument().addDocumentListener(filterListener);
     }
 }

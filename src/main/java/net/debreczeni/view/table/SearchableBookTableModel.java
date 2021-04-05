@@ -3,6 +3,7 @@ package net.debreczeni.view.table;
 import net.debreczeni.model.Book;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +45,10 @@ public class SearchableBookTableModel extends BookTableModel {
     }
 
     public void filter() {
-        filter.setRowFilter(genreFilter);
-        //fireTableDataChanged();
+        filter.sort();
+    }
+
+    public TableRowSorter<? extends TableModel> getRowSorter() {
+        return filter;
     }
 }
