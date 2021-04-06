@@ -14,8 +14,19 @@ public class HomeController {
         }
     }
 
-    public void showLogin(){
+    private HomeController() {
+    }
+
+    public static HomeController getInstance() {
+        return HomeController.Singleton.INSTANCE;
+    }
+
+    public void showLogin() {
         final Login login = new Login();
         login.setVisible(true);
+    }
+
+    private static class Singleton {
+        private static final HomeController INSTANCE = new HomeController();
     }
 }

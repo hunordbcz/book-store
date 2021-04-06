@@ -1,10 +1,12 @@
-package net.debreczeni.view.table;
+package net.debreczeni.model.table;
 
+import net.debreczeni.exception.OutOfStockException;
 import net.debreczeni.model.Book;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class BookTableModel extends AbstractTableModel {
@@ -88,5 +90,23 @@ public class BookTableModel extends AbstractTableModel {
             default:
                 return String.class;
         }
+    }
+
+    public Book getBook(Integer index) {
+        return books.get(index);
+    }
+
+    public void modifyStock(Book book, long modifiedWith) throws OutOfStockException {
+        final Optional<Book> optionalBook = books.stream().filter(o -> o.equals(book)).findAny();
+        if (optionalBook.isEmpty()) {
+            return;
+        }
+
+        final Book innerBook = optionalBook.get();
+        if(innerBook.getQuantity() - modifiedWith < 0){
+            throw new OutOfStockException("Not enough stock for book " + book.getTitle());
+        }
+        innerBook.setQuantity(innerBook.getQuantity() - modifiedWith);
+        fireTableDataChanged();
     }
 }

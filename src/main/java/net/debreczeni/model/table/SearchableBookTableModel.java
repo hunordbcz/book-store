@@ -1,12 +1,10 @@
-package net.debreczeni.view.table;
+package net.debreczeni.model.table;
 
 import net.debreczeni.model.Book;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;

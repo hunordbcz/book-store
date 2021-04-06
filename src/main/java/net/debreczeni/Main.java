@@ -4,7 +4,7 @@ import net.debreczeni.controller.HomeController;
 
 public class Main {
     public static void main(String[] args) {
-        new HomeController().showLogin();
+        HomeController.getInstance().showLogin();
 
         /*User user = new User();
         user.setUsername("username");

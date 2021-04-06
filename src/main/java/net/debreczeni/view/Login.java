@@ -21,7 +21,7 @@ public class Login extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setLocationRelativeTo(null);
-        this.authController = new AuthController();
+        this.authController = AuthController.getInstance();
 
         enterButton.addActionListener(e -> {
             try {

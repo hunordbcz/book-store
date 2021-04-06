@@ -1,4 +1,4 @@
-package net.debreczeni.view.table;
+package net.debreczeni.model.table;
 
 import net.debreczeni.model.Book;
 
