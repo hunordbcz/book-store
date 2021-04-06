@@ -42,10 +42,6 @@ public class SearchableBookTableModel extends BookTableModel {
         ));
     }
 
-    public void filter() {
-        filter.sort();
-    }
-
     public TableRowSorter<? extends TableModel> getRowSorter() {
         return filter;
     }
