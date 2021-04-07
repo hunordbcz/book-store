@@ -4,6 +4,7 @@ import net.debreczeni.exception.InvalidOrderException;
 import net.debreczeni.exception.OutOfStockException;
 import net.debreczeni.model.Book;
 import net.debreczeni.model.table.CartTableModel;
+import net.debreczeni.model.table.ManageableBookTableModel;
 import net.debreczeni.model.table.SearchableBookTableModel;
 
 import java.util.ArrayList;
@@ -61,6 +62,10 @@ public class BookController {
         return searchableBookTableModel;
     }
 
+    public ManageableBookTableModel getManageableBookTableModel(){
+        return new ManageableBookTableModel(this::getAll);
+    }
+
     public CartTableModel getCartTableModel() {
         return getCartTableModel(false);
     }
@@ -80,6 +85,10 @@ public class BookController {
 
         book.setQuantity(book.getQuantity() - 1);
         cartTableModel.addBook(book);
+    }
+
+    public void removeBook(Book book){
+
     }
 
     public void removeFromCart(Integer index) {

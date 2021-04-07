@@ -1,15 +1,13 @@
 package net.debreczeni.view;
 
-import net.debreczeni.controller.AuthController;
+import net.debreczeni.controller.UserController;
 import net.debreczeni.exception.AuthException;
-import net.debreczeni.model.AccessType;
-import net.debreczeni.model.User;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Login extends JFrame {
-    private final AuthController authController;
+    private static final UserController userController = UserController.getInstance();
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton enterButton;
@@ -21,11 +19,10 @@ public class Login extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setLocationRelativeTo(null);
-        this.authController = AuthController.getInstance();
 
         enterButton.addActionListener(e -> {
             try {
-                authController.authenticate(usernameField.getText(), passwordField.getPassword());
+                userController.authenticate(usernameField.getText(), passwordField.getText());
                 this.dispose();
             } catch (AuthException authException) {
                 JOptionPane.showMessageDialog(

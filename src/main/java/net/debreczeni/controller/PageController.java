@@ -4,21 +4,21 @@ import net.debreczeni.view.Login;
 
 import javax.swing.*;
 
-public class HomeController {
+public class PageController {
 
     static {
         try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
     }
 
-    private HomeController() {
+    private PageController() {
     }
 
-    public static HomeController getInstance() {
-        return HomeController.Singleton.INSTANCE;
+    public static PageController getInstance() {
+        return PageController.Singleton.INSTANCE;
     }
 
     public void showLogin() {
@@ -27,6 +27,6 @@ public class HomeController {
     }
 
     private static class Singleton {
-        private static final HomeController INSTANCE = new HomeController();
+        private static final PageController INSTANCE = new PageController();
     }
 }

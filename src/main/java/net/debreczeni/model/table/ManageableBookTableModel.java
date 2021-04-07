@@ -1,12 +1,13 @@
 package net.debreczeni.model.table;
 
+import net.debreczeni.controller.BookController;
 import net.debreczeni.model.Book;
 
 import java.util.List;
 import java.util.function.Supplier;
 
-public class EditableBookTableModel extends BookTableModel {
-    public EditableBookTableModel(Supplier<List<Book>> bookSupplier) {
+public class ManageableBookTableModel extends SearchableBookTableModel {
+    public ManageableBookTableModel(Supplier<List<Book>> bookSupplier) {
         super(bookSupplier);
     }
 
@@ -36,5 +37,11 @@ public class EditableBookTableModel extends BookTableModel {
             default:
                 break;
         }
+    }
+
+    public void removeBook(int index) {
+        final Book book = books.get(index);
+        BookController.getInstance().removeBook(book);
+        refresh();
     }
 }

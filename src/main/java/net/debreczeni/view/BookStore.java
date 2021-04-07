@@ -1,8 +1,10 @@
 package net.debreczeni.view;
 
 import net.debreczeni.controller.BookController;
+import net.debreczeni.controller.PageController;
 import net.debreczeni.exception.InvalidOrderException;
 import net.debreczeni.exception.OutOfStockException;
+import net.debreczeni.model.User;
 import net.debreczeni.model.table.BookTableModel;
 import net.debreczeni.model.table.SearchableBookTableModel;
 import net.debreczeni.util.FilterOnChangeDocumentListener;
@@ -13,7 +15,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class BookStore extends JFrame {
-    private final BookController bookController;
+    private static final BookController bookController = BookController.getInstance();
+    private static final PageController pageController = PageController.getInstance();
+
+    private final User user;
     private JPanel mainPanel;
     private JButton addToOrderButton;
     private JTable bookTable;
@@ -23,14 +28,15 @@ public class BookStore extends JFrame {
     private JTextField genreSearchField;
     private JTextField titleSearchField;
     private JTextField authorSearchField;
+    private JButton logoutButton;
 
-    public BookStore(SearchableBookTableModel bookListModel, BookTableModel orderModel) throws HeadlessException {
+    public BookStore(User user, SearchableBookTableModel bookListModel, BookTableModel orderModel) throws HeadlessException {
         this.setTitle(this.getClass().getSimpleName());
         this.setContentPane(mainPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.pack();
-        this.bookController = BookController.getInstance();
+        this.user = user;
 
         bookTable.setModel(bookListModel);
         cartTable.setModel(orderModel);
@@ -131,6 +137,11 @@ public class BookStore extends JFrame {
                         JOptionPane.ERROR_MESSAGE
                 );
             }
+        });
+
+        logoutButton.addActionListener(e -> {
+            this.dispose();
+            pageController.showLogin();
         });
     }
 }
