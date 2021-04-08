@@ -1,29 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <users>
-    <users>
-        <entry>
-            <key>1</key>
-            <value>
-                <accessType>MANAGER</accessType>
-                <password>testPass</password>
-                <username>username</username>
-            </value>
-        </entry>
-        <entry>
-            <key>2</key>
-            <value>
-                <accessType>MANAGER</accessType>
-                <password>testPass</password>
-                <username>username</username>
-            </value>
-        </entry>
-        <entry>
-            <key>3</key>
-            <value>
-                <accessType>MANAGER</accessType>
-                <password>testPass</password>
-                <username>username</username>
-            </value>
-        </entry>
-    </users>
+    <user>
+        <accessType>MANAGER</accessType>
+        <id>1</id>
+        <password>test</password>
+        <username>admin</username>
+    </user>
 </users>

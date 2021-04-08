@@ -1,48 +1,101 @@
 package net.debreczeni.xml;
 
 import net.debreczeni.model.Book;
-import net.debreczeni.model.User;
+import net.debreczeni.model.list.BookList;
+import net.debreczeni.model.list.ModelList;
 
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Map;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
-public class BookXml implements XmlHandler<Book>{
-    @Override
-    public BufferedReader getReader() throws FileNotFoundException {
-        return null;
+public class BookXml implements XmlHandler<Book> {
+    private static final AtomicInteger currentID = new AtomicInteger(-1);
+
+    private final JAXBContext jaxbContext;
+    private final Marshaller marshaller;
+    private final String filename;
+
+    public BookXml(String filename) throws JAXBException, IOException {
+        this.filename = filename;
+
+        jaxbContext = JAXBContext.newInstance(BookList.class);
+        marshaller = jaxbContext.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+        setCurrentID();
     }
 
     @Override
-    public BufferedWriter getWriter() throws IOException {
-        return null;
+    public void setCurrentID() throws IOException, JAXBException {
+        if (currentID.get() == -1) {
+            return;
+        }
+
+        currentID.set(get().stream().map(Book::getId).max(Comparator.naturalOrder()).orElse(0));
     }
 
     @Override
-    public void create(Book obj) {
-
+    public int getNewID() {
+        return currentID.incrementAndGet();
     }
 
     @Override
-    public Map<Integer, User> get() {
-        return null;
+    public synchronized BufferedReader getReader() throws FileNotFoundException {
+        final File f = new File(filename);
+        return new BufferedReader(new FileReader(f));
     }
 
     @Override
-    public void set(Object list) throws JAXBException, IOException {
-
+    public synchronized BufferedWriter getWriter() throws IOException {
+        final File f = new File(filename);
+        return new BufferedWriter(new FileWriter(f));
     }
 
     @Override
-    public void update(int id, Book obj) {
+    public synchronized void create(Book book) throws JAXBException, IOException {
+        final List<Book> books = get();
+        book.setId(getNewID());
+        books.add(book);
 
+        set(books);
     }
 
     @Override
-    public void delete(int id) {
+    public synchronized List<Book> get() throws JAXBException, IOException {
+        final BufferedReader reader = getReader();
 
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        ModelList<Book> list = (BookList) unmarshaller.unmarshal(reader);
+
+        reader.close();
+        return list.getList();
+    }
+
+    @Override
+    public synchronized void set(List<Book> list) throws JAXBException, IOException {
+        final BufferedWriter writer = getWriter();
+        marshaller.marshal(new BookList(list), writer);
+        writer.flush();
+        writer.close();
+    }
+
+    @Override
+    public synchronized void update(Book obj) throws JAXBException, IOException {
+        final List<Book> list = get();
+        list.remove(obj); //is checked with ID
+        list.add(obj);
+
+        set(list);
+    }
+
+    @Override
+    public synchronized void delete(int id) throws JAXBException, IOException {
+        set(get().stream().filter(o -> o.getId() != id).collect(Collectors.toList()));
     }
 }

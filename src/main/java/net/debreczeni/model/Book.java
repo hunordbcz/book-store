@@ -4,33 +4,38 @@ package net.debreczeni.model;
 import lombok.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import java.util.Objects;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @XmlRootElement
-@XmlType(propOrder = {"title", "author", "genre", "quantity", "price"})
 public class Book {
+    private Integer id;
     private String title;
     private String author;
     private String genre;
     private Long quantity;
     private Double price;
 
+    public Book(String title, String author, String genre, Long quantity, Double price) {
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Book)) return false;
         Book book = (Book) o;
-        return Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(genre, book.genre) && Objects.equals(price, book.price);
+        return Objects.equals(id, book.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, author, genre, price);
+        return Objects.hash(id);
     }
 }

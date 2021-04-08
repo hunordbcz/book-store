@@ -6,6 +6,7 @@ import net.debreczeni.model.Book;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Optional;
 
 public class CartTableModel extends BookTableModel {

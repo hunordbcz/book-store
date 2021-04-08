@@ -6,16 +6,18 @@ import net.debreczeni.model.Book;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
 public class BookTableModel extends AbstractTableModel {
 
-    public final static int TITLE = 0;
-    public final static int AUTHOR = 1;
-    public final static int GENRE = 2;
-    public final static int QUANTITY = 3;
-    public final static int PRICE = 4;
+    public final static int ID = 0;
+    public final static int TITLE = 1;
+    public final static int AUTHOR = 2;
+    public final static int GENRE = 3;
+    public final static int QUANTITY = 4;
+    public final static int PRICE = 5;
 
     private final Supplier<List<Book>> bookSupplier;
     protected List<Book> books;
@@ -37,13 +39,15 @@ public class BookTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 6;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         final Book book = books.get(rowIndex);
         switch (columnIndex) {
+            case ID:
+                return book.getId();
             case TITLE:
                 return book.getTitle();
             case AUTHOR:
@@ -62,6 +66,8 @@ public class BookTableModel extends AbstractTableModel {
     @Override
     public String getColumnName(int column) {
         switch (column) {
+            case ID:
+                return "ID";
             case TITLE:
                 return "Title";
             case AUTHOR:
@@ -80,6 +86,8 @@ public class BookTableModel extends AbstractTableModel {
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
+            case ID:
+                return Integer.class;
             case QUANTITY:
                 return Long.class;
             case PRICE:
@@ -103,7 +111,7 @@ public class BookTableModel extends AbstractTableModel {
         }
 
         final Book innerBook = optionalBook.get();
-        if(innerBook.getQuantity() - modifiedWith < 0){
+        if (innerBook.getQuantity() - modifiedWith < 0) {
             throw new OutOfStockException("Not enough stock for book " + book.getTitle());
         }
         innerBook.setQuantity(innerBook.getQuantity() - modifiedWith);

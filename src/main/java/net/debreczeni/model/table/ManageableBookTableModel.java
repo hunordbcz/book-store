@@ -13,7 +13,7 @@ public class ManageableBookTableModel extends SearchableBookTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return true;
+        return columnIndex != ID;
     }
 
     @Override

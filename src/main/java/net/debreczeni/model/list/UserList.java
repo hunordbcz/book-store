@@ -1,5 +1,6 @@
 package net.debreczeni.model.list;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,18 +10,15 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Map;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @XmlRootElement(name = "users")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Users {
+public class UserList extends ModelList<User> {
     @XmlElement(name = "user")
-    private Map<Integer, User> users;
-
-    public Users(Map<Integer, User> users) {
-        this.users = users;
-    }
+    private List<User> list;
 }

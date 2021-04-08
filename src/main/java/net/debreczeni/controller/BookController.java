@@ -6,9 +6,10 @@ import net.debreczeni.model.Book;
 import net.debreczeni.model.table.CartTableModel;
 import net.debreczeni.model.table.ManageableBookTableModel;
 import net.debreczeni.model.table.SearchableBookTableModel;
+import net.debreczeni.service.BookService;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class BookController {
 
@@ -23,32 +24,7 @@ public class BookController {
     }
 
     public List<Book> getAll() {
-        Book book1 = new Book(
-                "Title1",
-                "Author1",
-                "Genre1",
-                12L,
-                10D
-        );
-        Book book2 = new Book(
-                "Clean Code2",
-                "Joking Rowling2",
-                "Comedy2",
-                12L,
-                10D
-        );
-        Book book3 = new Book(
-                "asd3",
-                "tes3",
-                "ghj3",
-                12L,
-                10D
-        );
-        List<Book> books = new ArrayList<>();
-        books.add(book1);
-        books.add(book2);
-        books.add(book3);
-        return books;
+        return BookService.getInstance().getAll();
     }
 
     public SearchableBookTableModel getSearchableBookTableModel() {
@@ -88,7 +64,7 @@ public class BookController {
     }
 
     public void removeBook(Book book){
-
+        BookService.getInstance().delete(book.getId());
     }
 
     public void removeFromCart(Integer index) {
