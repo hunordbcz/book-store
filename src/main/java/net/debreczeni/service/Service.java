@@ -1,7 +1,5 @@
 package net.debreczeni.service;
 
-import net.debreczeni.model.User;
-
 import java.util.List;
 
 public interface Service<T> {

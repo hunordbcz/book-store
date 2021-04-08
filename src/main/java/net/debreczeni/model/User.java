@@ -13,7 +13,6 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @XmlRootElement
-//@XmlType(propOrder = {"username", "password", "accessType"})
 public class User {
     private Integer id;
     private String username;

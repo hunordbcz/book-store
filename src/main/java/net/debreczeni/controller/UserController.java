@@ -1,6 +1,7 @@
 package net.debreczeni.controller;
 
 import net.debreczeni.exception.AuthException;
+import net.debreczeni.exception.ValidationException;
 import net.debreczeni.model.AccessType;
 import net.debreczeni.model.User;
 import net.debreczeni.model.table.UserTableModel;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService = UserService.getInstance();
     private final BookController bookController = BookController.getInstance();
+    private UserTableModel userTableModel;
 
     private UserController() {
     }
@@ -43,7 +45,11 @@ public class UserController {
     }
 
     public UserTableModel getUserTableModel() {
-        return new UserTableModel(this::getAll);
+        if (userTableModel == null) {
+            userTableModel = new UserTableModel(this::getAll);
+        }
+
+        return userTableModel;
     }
 
     public List<User> getAll() {
@@ -54,8 +60,29 @@ public class UserController {
         userService.delete(user.getId());
     }
 
-    public void update(User user) {
+    public void update(User user) throws ValidationException {
+        if (user.getUsername() == null || user.getUsername().isEmpty()) {
+            throw new ValidationException("Username must not be empty");
+        }
+
+        final Optional<User> existingUser = getAll().stream().filter(innerUser ->
+                !innerUser.getId().equals(user.getId()) &&
+                        innerUser.getUsername().equals(user.getUsername())
+        ).findAny();
+
+        if (existingUser.isPresent()) {
+            throw new ValidationException("Username is already taken");
+        }
+
         userService.update(user);
+    }
+
+    public void addUserToTable() {
+        userTableModel.newUser();
+    }
+
+    public void persistTableData() {
+        userTableModel.persistData();
     }
 
     private static class Singleton {

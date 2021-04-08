@@ -6,4 +6,10 @@
         <password>test</password>
         <username>admin</username>
     </user>
+    <user>
+        <accessType>SELLER</accessType>
+        <id>8</id>
+        <password>test</password>
+        <username>test</username>
+    </user>
 </users>

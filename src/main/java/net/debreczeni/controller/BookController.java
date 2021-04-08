@@ -2,6 +2,7 @@ package net.debreczeni.controller;
 
 import net.debreczeni.exception.InvalidOrderException;
 import net.debreczeni.exception.OutOfStockException;
+import net.debreczeni.exception.ValidationException;
 import net.debreczeni.model.Book;
 import net.debreczeni.model.table.CartTableModel;
 import net.debreczeni.model.table.ManageableBookTableModel;
@@ -9,12 +10,15 @@ import net.debreczeni.model.table.SearchableBookTableModel;
 import net.debreczeni.service.BookService;
 
 import java.util.List;
-import java.util.Map;
+
+import static net.debreczeni.util.StringUtils.isBlank;
 
 public class BookController {
 
+    private final BookService bookService = BookService.getInstance();
     private SearchableBookTableModel searchableBookTableModel;
     private CartTableModel cartTableModel;
+    private ManageableBookTableModel manageableBookTableModel;
 
     private BookController() {
     }
@@ -24,7 +28,7 @@ public class BookController {
     }
 
     public List<Book> getAll() {
-        return BookService.getInstance().getAll();
+        return bookService.getAll();
     }
 
     public SearchableBookTableModel getSearchableBookTableModel() {
@@ -38,8 +42,11 @@ public class BookController {
         return searchableBookTableModel;
     }
 
-    public ManageableBookTableModel getManageableBookTableModel(){
-        return new ManageableBookTableModel(this::getAll);
+    public ManageableBookTableModel getManageableBookTableModel() {
+        if (manageableBookTableModel == null) {
+            this.manageableBookTableModel = new ManageableBookTableModel(this::getAll);
+        }
+        return manageableBookTableModel;
     }
 
     public CartTableModel getCartTableModel() {
@@ -63,8 +70,8 @@ public class BookController {
         cartTableModel.addBook(book);
     }
 
-    public void removeBook(Book book){
-        BookService.getInstance().delete(book.getId());
+    public void removeBook(Book book) {
+        bookService.delete(book.getId());
     }
 
     public void removeFromCart(Integer index) {
@@ -90,7 +97,32 @@ public class BookController {
         final Long total = cartTableModel.total();
         //todo generate invoice ?
         cartTableModel.refresh();
+        searchableBookTableModel.persistData(false);
         return total;
+    }
+
+    public void persistTableData() {
+        manageableBookTableModel.persistData(true);
+    }
+
+    public void addBookToTable() {
+        manageableBookTableModel.newBook();
+    }
+
+    public void update(Book book) throws ValidationException {
+        if (
+                isBlank(book.getTitle()) ||
+                        isBlank(book.getGenre()) ||
+                        isBlank(book.getAuthor()) ||
+                        book.getQuantity() == null ||
+                        book.getQuantity() < 0 ||
+                        book.getPrice() == null ||
+                        book.getPrice() < 0
+        ) {
+            throw new ValidationException("Invalid fields for book");
+        }
+
+        bookService.update(book);
     }
 
     private static class Singleton {

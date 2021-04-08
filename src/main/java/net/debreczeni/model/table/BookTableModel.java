@@ -1,12 +1,14 @@
 package net.debreczeni.model.table;
 
+import net.debreczeni.controller.BookController;
 import net.debreczeni.exception.OutOfStockException;
+import net.debreczeni.exception.ValidationException;
 import net.debreczeni.model.Book;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -18,7 +20,7 @@ public class BookTableModel extends AbstractTableModel {
     public final static int GENRE = 3;
     public final static int QUANTITY = 4;
     public final static int PRICE = 5;
-
+    protected final BookController bookController = BookController.getInstance();
     private final Supplier<List<Book>> bookSupplier;
     protected List<Book> books;
 
@@ -116,5 +118,32 @@ public class BookTableModel extends AbstractTableModel {
         }
         innerBook.setQuantity(innerBook.getQuantity() - modifiedWith);
         fireTableDataChanged();
+    }
+
+    public void persistData(boolean showNotification) {
+        try {
+            for (Book book : books) {
+                bookController.update(book);
+            }
+
+            if (showNotification) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Books successfully updated",
+                        "Updated",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            }
+            refresh();
+        } catch (ValidationException ex) {
+            if (showNotification) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        ex.getMessage(),
+                        "Invalid values",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        }
     }
 }

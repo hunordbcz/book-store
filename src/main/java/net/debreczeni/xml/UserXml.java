@@ -9,8 +9,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -21,13 +23,14 @@ public class UserXml implements XmlHandler<User> {
     private final Marshaller marshaller;
     private final String filename;
 
-    public UserXml(String filename) throws JAXBException {
+    public UserXml(String filename) throws JAXBException, IOException {
         this.filename = filename;
-
 
         jaxbContext = JAXBContext.newInstance(UserList.class);
         marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+        setCurrentID();
     }
 
     @Override
@@ -73,7 +76,7 @@ public class UserXml implements XmlHandler<User> {
         ModelList<User> list = (UserList) unmarshaller.unmarshal(reader);
 
         reader.close();
-        return list.getList();
+        return Optional.ofNullable(list.getList()).orElse(new ArrayList<>());
     }
 
     @Override

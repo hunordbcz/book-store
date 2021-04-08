@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<books>
+    <book>
+        <author>test</author>
+        <genre>test</genre>
+        <id>0</id>
+        <price>2.0</price>
+        <quantity>1</quantity>
+        <title>test</title>
+    </book>
+    <book>
+        <author>asdf</author>
+        <genre>asdf</genre>
+        <id>1</id>
+        <price>4.0</price>
+        <quantity>0</quantity>
+        <title>asd</title>
+    </book>
+    <book>
+        <author>fasd</author>
+        <genre>fdsa</genre>
+        <id>3</id>
+        <price>4.0</price>
+        <quantity>0</quantity>
+        <title>fdsa</title>
+    </book>
+</books>

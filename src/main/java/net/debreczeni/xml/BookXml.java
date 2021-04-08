@@ -9,8 +9,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -74,11 +76,13 @@ public class BookXml implements XmlHandler<Book> {
         ModelList<Book> list = (BookList) unmarshaller.unmarshal(reader);
 
         reader.close();
-        return list.getList();
+        return Optional.ofNullable(list.getList()).orElse(new ArrayList<>());
     }
 
     @Override
     public synchronized void set(List<Book> list) throws JAXBException, IOException {
+        list.stream().filter(book -> book.getId() == null).forEach(book -> book.setId(getNewID()));
+
         final BufferedWriter writer = getWriter();
         marshaller.marshal(new BookList(list), writer);
         writer.flush();

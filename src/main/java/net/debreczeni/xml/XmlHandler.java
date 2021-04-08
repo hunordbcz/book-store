@@ -1,14 +1,11 @@
 package net.debreczeni.xml;
 
-import net.debreczeni.model.Book;
-
 import javax.xml.bind.JAXBException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 public interface XmlHandler<T> {
 

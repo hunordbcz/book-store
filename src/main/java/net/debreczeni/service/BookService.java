@@ -2,15 +2,12 @@ package net.debreczeni.service;
 
 import lombok.SneakyThrows;
 import net.debreczeni.model.Book;
-import net.debreczeni.model.User;
 import net.debreczeni.xml.BookXml;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +17,7 @@ public class BookService implements Service<Book> {
 
     @SneakyThrows
     private BookService() {
-        bookXml = new BookXml("books.xml");
+        bookXml = new BookXml("src/main/resources/books.xml");
     }
 
     public static BookService getInstance() {
@@ -39,8 +36,7 @@ public class BookService implements Service<Book> {
     @Override
     public List<Book> getAll() {
         try {
-            final List<Book> books = bookXml.get();
-            return Optional.ofNullable(books).orElse(new ArrayList<>());
+            return bookXml.get();
         } catch (JAXBException | IOException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
             return new ArrayList<>();

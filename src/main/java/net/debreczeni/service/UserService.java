@@ -7,9 +7,7 @@ import net.debreczeni.xml.UserXml;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,7 +17,7 @@ public class UserService implements Service<User> {
 
     @SneakyThrows
     private UserService() {
-        userXml = new UserXml("users.xml");
+        userXml = new UserXml("src/main/resources/users.xml");
     }
 
     public static UserService getInstance() {
@@ -38,8 +36,7 @@ public class UserService implements Service<User> {
     @Override
     public List<User> getAll() {
         try {
-            final List<User> users = userXml.get();
-            return Optional.ofNullable(users).orElse(new ArrayList<>());
+            return userXml.get();
         } catch (JAXBException | IOException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
             return new ArrayList<>();

@@ -6,7 +6,6 @@ import net.debreczeni.model.Book;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Optional;
 
 public class CartTableModel extends BookTableModel {
@@ -21,6 +20,7 @@ public class CartTableModel extends BookTableModel {
             cartBook.setQuantity(cartBook.getQuantity() + 1);
         } else {
             books.add(new Book(
+                    book.getId(),
                     book.getTitle(),
                     book.getAuthor(),
                     book.getGenre(),
@@ -89,5 +89,10 @@ public class CartTableModel extends BookTableModel {
 
     public long total() {
         return books.stream().mapToLong(o -> (long) (o.getQuantity() * o.getPrice())).sum();
+    }
+
+    @Override
+    public void persistData(boolean showNotification) {
+        //do nothing
     }
 }
