@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class UserXml implements XmlHandler<User> {
-    private static final AtomicInteger currentID = new AtomicInteger();
+    private static final AtomicInteger currentID = new AtomicInteger(-1);
 
     private final JAXBContext jaxbContext;
     private final Marshaller marshaller;
@@ -35,7 +35,7 @@ public class UserXml implements XmlHandler<User> {
 
     @Override
     public void setCurrentID() throws IOException, JAXBException {
-        if (currentID.get() == -1) {
+        if (currentID.get() != -1) {
             return;
         }
 

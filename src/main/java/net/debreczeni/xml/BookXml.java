@@ -35,7 +35,7 @@ public class BookXml implements XmlHandler<Book> {
 
     @Override
     public void setCurrentID() throws IOException, JAXBException {
-        if (currentID.get() == -1) {
+        if (currentID.get() != -1) {
             return;
         }
 

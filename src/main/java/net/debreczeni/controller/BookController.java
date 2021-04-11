@@ -95,7 +95,6 @@ public class BookController {
         }
 
         final Long total = cartTableModel.total();
-        //todo generate invoice ?
         cartTableModel.refresh();
         searchableBookTableModel.persistData(false);
         return total;
