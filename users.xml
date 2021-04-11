@@ -10,6 +10,11 @@
         <accessType>SELLER</accessType>
         <id>8</id>
         <password>test</password>
-        <username>test</username>
+        <username>seller</username>
+    </user>
+    <user>
+        <id>9</id>
+        <password>test</password>
+        <username>user</username>
     </user>
 </users>

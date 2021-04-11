@@ -17,7 +17,7 @@ public class BookService implements Service<Book> {
 
     @SneakyThrows
     private BookService() {
-        bookXml = new BookXml("src/main/resources/books.xml");
+        bookXml = new BookXml("books.xml");
     }
 
     public static BookService getInstance() {

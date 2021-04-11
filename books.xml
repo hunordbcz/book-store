@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<books>
+    <book>
+        <author>George Orwell</author>
+        <genre>Classic Novels</genre>
+        <id>6</id>
+        <price>11.99</price>
+        <quantity>3</quantity>
+        <title>1984</title>
+    </book>
+    <book>
+        <author>J.R.R. Tolkien</author>
+        <genre>Classic Novels</genre>
+        <id>7</id>
+        <price>51.99</price>
+        <quantity>0</quantity>
+        <title>The Lord of the Rings</title>
+    </book>
+    <book>
+        <author>Khaled Hosseini</author>
+        <genre>Classic Novels</genre>
+        <id>8</id>
+        <price>11.99</price>
+        <quantity>4</quantity>
+        <title>The Kite Runner</title>
+    </book>
+    <book>
+        <author>J.K. Rowling</author>
+        <genre>Classic Novels</genre>
+        <id>9</id>
+        <price>11.99</price>
+        <quantity>1</quantity>
+        <title>Harry Potter and the Philosopher’s Stone</title>
+    </book>
+    <book>
+        <author>Kurt Vonnegut</author>
+        <genre>Classic Novels</genre>
+        <id>10</id>
+        <price>11.99</price>
+        <quantity>1</quantity>
+        <title>Slaughterhouse-Five</title>
+    </book>
+    <book>
+        <author>C.S. Lewis</author>
+        <genre>Classic Novels</genre>
+        <id>11</id>
+        <price>11.99</price>
+        <quantity>3</quantity>
+        <title>The Lion, the Witch, and the Wardrobe</title>
+    </book>
+    <book>
+        <author>Harper Lee</author>
+        <genre>Classic Novels</genre>
+        <id>12</id>
+        <price>11.99</price>
+        <quantity>4</quantity>
+        <title>To Kill a Mockingbird</title>
+    </book>
+    <book>
+        <author>Markus Zusak</author>
+        <genre>Classic Novels</genre>
+        <id>13</id>
+        <price>11.99</price>
+        <quantity>1</quantity>
+        <title>The Book Thief</title>
+    </book>
+    <book>
+        <author>Robert T. Kiyosaki</author>
+        <genre>Business and Money</genre>
+        <id>14</id>
+        <price>41.99</price>
+        <quantity>4</quantity>
+        <title>Rich Dad Poor Dad: What the Rich Teach Their Kids About Money That the Poor and Middle Class Do Not!</title>
+    </book>
+    <book>
+        <author>Napoleon Hill</author>
+        <genre>Classic Novels</genre>
+        <id>15</id>
+        <price>41.99</price>
+        <quantity>5</quantity>
+        <title>Think and Grow Rich</title>
+    </book>
+    <book>
+        <author>F. Scott Fitzgerald</author>
+        <genre>Classic Novels</genre>
+        <id>16</id>
+        <price>41.99</price>
+        <quantity>4</quantity>
+        <title>The Great Gatsby</title>
+    </book>
+    <book>
+        <author>Douglas Adams</author>
+        <genre>Classic Novels</genre>
+        <id>17</id>
+        <price>41.99</price>
+        <quantity>5</quantity>
+        <title>The Hitchhiker’s Guide to the Galaxy</title>
+    </book>
+    <book>
+        <author>John Steinbeck</author>
+        <genre>Classic Novels</genre>
+        <id>18</id>
+        <price>41.99</price>
+        <quantity>5</quantity>
+        <title>Of Mice and Men</title>
+    </book>
+    <book>
+        <author>Mary Shelley</author>
+        <genre>Classic Novels</genre>
+        <id>19</id>
+        <price>41.99</price>
+        <quantity>5</quantity>
+        <title>Frankenstein</title>
+    </book>
+    <book>
+        <author>E.B. White</author>
+        <genre>Classic Novels</genre>
+        <id>20</id>
+        <price>41.99</price>
+        <quantity>3</quantity>
+        <title>Charlotte’s Web</title>
+    </book>
+    <book>
+        <author>Benjamin Graham</author>
+        <genre>Business and Money</genre>
+        <id>21</id>
+        <price>41.99</price>
+        <quantity>1</quantity>
+        <title>The Intelligent Investor</title>
+    </book>
+    <book>
+        <author>Ray Dalio</author>
+        <genre>Business and Money</genre>
+        <id>22</id>
+        <price>41.99</price>
+        <quantity>5</quantity>
+        <title>Principles: Life and Work</title>
+    </book>
+    <book>
+        <author>Robert B. Cialdini</author>
+        <genre>Business and Money</genre>
+        <id>23</id>
+        <price>41.99</price>
+        <quantity>2</quantity>
+        <title>Influence: The Psychology of Persuasion</title>
+    </book>
+    <book>
+        <author>Dale Carnegie</author>
+        <genre>Personal Development</genre>
+        <id>24</id>
+        <price>11.99</price>
+        <quantity>1</quantity>
+        <title>How to Win Friends and Influence People</title>
+    </book>
+    <book>
+        <author>Charles Duhigg  </author>
+        <genre>Personal Development</genre>
+        <id>25</id>
+        <price>11.99</price>
+        <quantity>1</quantity>
+        <title>The Power of Habit: Why We Do What We Do in Life and Business</title>
+    </book>
+    <book>
+        <author>Stephen Hawking</author>
+        <genre>Science and Technology</genre>
+        <id>26</id>
+        <price>11.99</price>
+        <quantity>1</quantity>
+        <title>A Brief History of Time</title>
+    </book>
+    <book>
+        <author>Steven D. Levitt</author>
+        <genre>Science and Technology</genre>
+        <id>27</id>
+        <price>41.99</price>
+        <quantity>3</quantity>
+        <title>Freakonomics: A Rogue Economist Explores the Hidden Side of Everything</title>
+    </book>
+    <book>
+        <author>Anna Wiener</author>
+        <genre>Science and Technology</genre>
+        <id>28</id>
+        <price>11.99</price>
+        <quantity>4</quantity>
+        <title>Uncanny Valley </title>
+    </book>
+    <book>
+        <author>Jack Kerouac</author>
+        <genre>Travel and Adventure</genre>
+        <id>29</id>
+        <price>41.99</price>
+        <quantity>2</quantity>
+        <title>On the Road</title>
+    </book>
+    <book>
+        <author>Rolf Potts</author>
+        <genre>Travel and Adventure</genre>
+        <id>30</id>
+        <price>41.99</price>
+        <quantity>3</quantity>
+        <title>Vagabonding</title>
+    </book>
+    <book>
+        <author>Yuval Noah Harari</author>
+        <genre>Biographies and History</genre>
+        <id>31</id>
+        <price>41.99</price>
+        <quantity>4</quantity>
+        <title>Sapiens: A Brief History of Humankind</title>
+    </book>
+    <book>
+        <author>Nelson Mandela</author>
+        <genre>Biographies and History</genre>
+        <id>32</id>
+        <price>41.99</price>
+        <quantity>1</quantity>
+        <title>Long Walk to Freedom</title>
+    </book>
+    <book>
+        <author>Bill Bryson</author>
+        <genre>Biographies and History</genre>
+        <id>33</id>
+        <price>41.99</price>
+        <quantity>2</quantity>
+        <title>A Short History of Nearly Everything</title>
+    </book>
+    <book>
+        <author>test</author>
+        <genre>test</genre>
+        <id>35</id>
+        <price>3.0</price>
+        <quantity>2</quantity>
+        <title>New</title>
+    </book>
+</books>

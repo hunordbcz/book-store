@@ -5,7 +5,7 @@ import net.debreczeni.controller.BookController;
 import java.util.logging.Logger;
 
 public interface Report {
-    String RESOURCE_PATH = "src/main/resources/";
+    String RESOURCE_PATH = "./";
     Logger LOGGER = Logger.getLogger(Report.class.getSimpleName());
     BookController bookController = BookController.getInstance();
 

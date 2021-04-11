@@ -17,7 +17,7 @@ public class UserService implements Service<User> {
 
     @SneakyThrows
     private UserService() {
-        userXml = new UserXml("src/main/resources/users.xml");
+        userXml = new UserXml("users.xml");
     }
 
     public static UserService getInstance() {
